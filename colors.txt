@@ -1,0 +1,110 @@
+//INPUTS
+
+Sum energy production
+
+electric energy import: rgba(255,127,0,255) : orange,
+electric energy water : rgba(255,127,0,255) : orange,
+electric energy wind: rgba(255,127,0,255) : orange,
+electric energy solar: rgba(255,127,0,255) : orange,
+
+sum bio fuels green: rgba(0,255,1,255) : green,
+
+LPG gasol natural gas Industry : rgba(128,65,1,255) : brown,
+
+Bio gas : rgba(62,161,97,255) : dark green,
+
+CGP use of wastes : rgba(125,1,2,255) : dark red,
+
+Bio fuels biodrivmedel : rgba(1,192,193,255) : blue,
+
+Oil products : rgba(92,92,92,255) : grey,
+
+
+
+
+//INTERMEDIATE NODES INPUTS
+
+
+
+
+
+sum electric energy production (EEP) 
+
+DHP sum input energy : rgba(0,255,1,255) : green,
+DHP use of Bio gas : rgba(62,161,97,255) : dark green,
+DHP use of oil products : rgba(92,92,92,255) : grey,
+
+CGP use of bio fuels green : rgba(0,255,1,255) : green,
+CGP use of wastes : rgba(125,1,2,255) : dark red,
+CGP use of bio oil : rgba(1,192,193,255) : blue,
+CGP use of oil products : rgba(92,92,92,255) : grey,
+
+
+
+
+
+//INTERMEDIATE NODES OUTPUTS
+
+
+
+DHP output : rgba(127,128,0,255) : olive green,
+electric production CGP : rgba(255,127,0,255) : orange, 
+CGP output excl Electric production : rgba(127,128,0,255) : olive green, 
+
+
+DHP internal losses  
+CGP internal losses 
+CGP total energy output to users 
+
+
+
+
+
+
+//OUTPUTS
+
+
+
+Sum energy usage
+
+distribution losses
+sum energy use homes
+sum energy use others
+sum energy use municipality
+sum energy use earth and forrest
+sum energy use Industry
+sum energy use Transports
+
+
+distribution losses from EEP : rgba(255,127,0,255) : orange, 
+distribution losses DHP : rgba(127,128,0,255) : olive green, 
+distribution losses CGP : rgba(127,128,0,255) : olive green, 
+
+electricity homes : rgba(255,127,0,255) : orange, 
+bio fuels small houses direct heating green: rgba(0,255,1,255) : green,
+DHP homes : rgba(127,128,0,255) : olive green,  
+oil homes : rgba(92,92,92,255) : grey, 
+
+electricity other : rgba(255,127,0,255) : orange, 
+DHP others : rgba(127,128,0,255) : olive green,  
+oil others : rgba(92,92,92,255) : grey, 
+
+Electricity Municipality : rgba(255,127,0,255) : orange,  
+DHP Municipality : rgba(127,128,0,255) : olive green,  
+oil municipality : rgba(92,92,92,255) : grey, 
+
+electricity earth and forrest : rgba(255,127,0,255) : orange,  
+bio fuels earth and forrest : rgba(1,192,193,255) : blue,
+oil earth and forrest : rgba(92,92,92,255) : grey, 
+
+electricity industry : rgba(255,127,0,255) : orange,  
+DHP industry : rgba(127,128,0,255) : olive green,  
+LPG gasol natural gas industry : rgba(125,1,2,255) : dark red, 
+bio gas industry : rgba(62,161,97,255) : dark green, 
+bio fuels industry green : rgba(0,255,1,255) : green,
+bio fuels industry : rgba(1,192,193,255) : blue,
+oil industry : rgba(92,92,92,255) : grey, 
+
+electricity transport : rgba(255,127,0,255) : orange,  
+bio fuels transports : rgba(1,192,193,255) : blue,
+oil transports : rgba(92,92,92,255) : grey,
