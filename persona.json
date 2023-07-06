@@ -1,4 +1,5 @@
-{"electric energy import" : 'rgba(255,127,0,255)', 	
+{
+	"electric energy import" : 'rgba(255,127,0,255)', 	
 	"electric energy water" : 'rgba(255,127,0,255)',
 	"electric energy wind" : 'rgba(255,127,0,255)',
 	"electric energy solar": 'rgba(255,127,0,255)',
