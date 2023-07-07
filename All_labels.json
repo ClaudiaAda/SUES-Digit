@@ -1,0 +1,23 @@
+{"electric energy import": {
+    "color" : "rgba(255,127,0,255)",
+    "target" : ["sum electric energy production EPP"]
+    }, 
+"electric energy water" : {
+    "color": "rgba(0,255,1,255)",
+    "target": ["sum electric energy production EPP"]
+    }, 
+"electric energy wind": {
+    "color": "rgba(128,65,1,255)",
+    "target": ["sum electric energy production EPP"]
+    }, 
+"sum bio fuels green": {
+    "color": "rgba(62,161,97,255)",
+    "target": ["DHP sum input energy"]
+    },
+"DHP sum input energy" : {
+    "color": "rgba(62,161,97,255)"
+    }, 
+"sum electric energy production EPP" : {
+    "color": "rgba(1,192,193,255)"
+    }
+}
