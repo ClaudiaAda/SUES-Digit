@@ -4,11 +4,11 @@
     }, 
 "electric energy water" : {
     "color": "rgba(0,255,1,255)",
-    "target": ["sum electric energy production EPP"]
+    "target": ["sum bio fuels green","sum electric energy production EPP"]
     }, 
 "electric energy wind": {
     "color": "rgba(128,65,1,255)",
-    "target": ["sum electric energy production EPP"]
+    "target": ["sum bio fuels green"]
     }, 
 "sum bio fuels green": {
     "color": "rgba(62,161,97,255)",
