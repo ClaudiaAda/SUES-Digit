@@ -1,6 +1,6 @@
 {"electric energy import": {
     "color" : "rgba(255,127,0,255)",
-    "target" : ["sum electric energy production EPP"]
+    "target" : ["sum electric energy production EEP"]
     }, 
 "electric energy water" : {
     "color": "rgba(0,255,1,255)",
