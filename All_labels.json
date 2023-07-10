@@ -236,7 +236,7 @@
         ]
     },
     "CGP total energy output to users": {
-        "color": "gris",
+        "color": "grey",
         "target": [
             "electric production CGP",
             "CGP output excl Electric production"
