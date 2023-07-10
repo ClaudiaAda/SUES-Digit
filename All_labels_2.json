@@ -20,31 +20,31 @@
     },
 "distribution losses": {
     "color" : "orange",
-    "target" : "link"
+    "target" : "output"
     },
 "sum energy use homes": {
     "color" : "orange",
-    "target" : "link"
+    "target" : "output"
     },
 "sum energy use others": {
     "color" : "orange",
-    "target" : "link"
+    "target" : "output"
     },
 "sum energy use Public": {
     "color" : "orange",
-    "target" : "link"
+    "target" : "output"
     },
 "sum energy use Agriculture and forrestry": {
     "color" : "orange",
-    "target" : "link"
+    "target" : "output"
     },
 "sum energy use Industry": {
     "color" : "orange",
-    "target" : "link"
+    "target" : "output"
     },
 "sum energy use Transports": {
     "color" : "orange",
-    "target" : "link"    
+    "target" : "output"    
     },
 "sum electric energy production EEP" : {
     "color": "blue",
