@@ -1,0 +1,209 @@
+{
+    "electic energy import": {
+        "color": "rgba(255,127,0,255)",
+        "target": [
+            "sum electric energy production EPP"
+        ],
+        "value": [
+            "electic energy import"
+        ]
+    },
+    "electric energy water": {
+        "color": "rgba(255,127,0,255)",    
+        "target": [
+            "sum electric energy production EPP"
+        ],
+        "value": [
+            "electric energy water"
+        ]
+    },
+    "electric energy wind": {
+        "color": "rgba(255,127,0,255)",
+        "target": [
+            "sum electric energy production EPP"
+        ],
+        "value": [
+            "electric energy wind"
+        ]
+    },
+    "electric energy solar": {
+        "color": "rgba(255,127,0,255)",
+        "target": [
+            "sum electric energy production EPP"
+        ],
+        "value": [
+            "electric energy solar"
+        ]
+    },
+    "sum bio fuels green": {
+        "color": "rgba(0,255,1,255)",
+        "target": [
+            ""
+        ],
+        "value": [
+            ""
+        ]
+    },
+    "LPG gasol natural gas Industry": {
+        "color": "rgba(128,65,1,255)",
+        "target": [
+            ""
+        ],
+        "value": [
+            ""
+        ]
+    },
+    "Bio gas": {
+        "color": "rgba(62,161,97,255)",
+        "target": [
+            ""
+        ],
+        "value": [
+            ""
+        ]
+    },
+    "CGP use of wastes": {
+        "color": "rgba(125,1,2,255)",
+        "target": [
+            ""
+        ],
+        "value": [
+            ""
+        ]
+    },
+    "bio fuels biodrivmedel": {
+        "color": "rgba(1,192,193,255)",
+        "target": [
+            ""
+        ],
+        "value": [
+            ""
+        ]
+    },
+    "Oil products": {
+        "color": "rgba(92,92,92,255)",
+        "target": [
+            ""
+        ],
+        "value": [
+            ""
+        ]
+    },
+
+
+
+
+    "sum electric energy production EPP": {
+        "color": "white",
+        "target": [
+            "distribution losses",
+            "sum energy use homes",
+            "sum energy use others",
+            "sum energy use Public",
+            "sum energy use Agriculture and forrestry",
+            "sum energy use Industry",
+            "sum energy use Transports"
+        ],
+        "value": [
+            "distribution losses from EEP",
+            "electricity homes",
+            "electricity others",
+            "electricity Public",
+            "electricity Agriculture and forrestry",
+            "electricity Industry",
+            "electricity Transports"
+        ]
+    },
+    "DHP sum input energy": {
+        "color": "rgba(0,255,1,255)",
+        "target": [
+            ""
+        ],
+        "value": [
+            ""
+        ]
+    },
+    "DHP use of Bio gas": {
+        "color": "rgba(62,161,97,255)",
+        "target": [
+            ""
+        ],
+        "value": [
+            ""
+        ]
+    },
+    "DHP use of oil products": {
+        "color": "rgba(92,92,92,255)",
+        "target": [
+            ""
+        ],
+        "value": [
+            ""
+        ]
+    },
+    "CGP use of bio fuels green": {
+        "color": "rgba(0,255,1,255)",
+        "target": [
+            ""
+        ],
+        "value": [
+            ""
+        ]
+    },   
+    "CGP use of bio oil": {
+        "color": "rgba(1,192,193,255)",
+        "target": [
+            ""
+        ],
+        "value": [
+            ""
+        ]
+    },
+    "CGP use of oil product": {
+        "color": "rgba(92,92,92,255)",
+        "target": [
+            ""
+        ],
+        "value": [
+            ""
+        ]
+    },
+
+    
+
+
+
+
+
+
+
+    "distribution losses": {
+        "color": "rgba(255,127,0,255)",
+        "target": "link"
+    },
+    "sum energy use homes": {
+        "color": "white",
+        "target": "link"
+    },
+    "sum energy use others": {
+        "color": "orange",
+        "target": "white"
+    },
+    "sum energy use Public": {
+        "color": "white",
+        "target": "link"
+    },
+    "sum energy use Agriculture and forrestry": {
+        "color": "white",
+        "target": "link"
+    },
+    "sum energy use Industry": {
+        "color": "white",
+        "target": "link"
+    },
+    "sum energy use Transports": {
+        "color": "white",
+        "target": "link"
+    }
+}
+    
