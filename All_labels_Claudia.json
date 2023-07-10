@@ -1,21 +1,21 @@
 {"electic energy import": {
     "color" : "blue",
-    "target" : ["sum electric energy production EPP"],
+    "target" : ["sum electric energy production EEP"],
     "value" : ["electic energy import"]
     }, 
 "electric energy water" : {
     "color": "green",
-    "target": ["sum electric energy production EPP"],
+    "target": ["sum electric energy production EEP"],
     "value" : ["electric energy water"]
     }, 
 "electric energy wind": {
     "color": "pink",
-    "target": ["sum electric energy production EPP"],
+    "target": ["sum electric energy production EEP"],
     "value" : ["electric energy wind"]
     }, 
 "electric energy solar": {
     "color" : "red",
-    "target": ["sum electric energy production EPP"],
+    "target": ["sum electric energy production EEP"],
     "value": ["electric energy solar"]
     },
 "distribution losses": {
@@ -46,7 +46,7 @@
     "color" : "orange",
     "target" : "link"    
     },
-"sum electric energy production EPP" : {
+"sum electric energy production EEP" : {
     "color": "blue",
     "target" : ["distribution losses", "sum energy use homes", 
     "sum energy use others", "sum energy use Public", "sum energy use Agriculture and forrestry", 
