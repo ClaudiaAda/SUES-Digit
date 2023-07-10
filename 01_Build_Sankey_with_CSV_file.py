@@ -22,10 +22,9 @@ i = 0
 year = "0"
 slider = 5
 
-values = [1,1,1,1,1,1,1,1,1,1,1]
 
 # LOAD ALL LABELS
-url_all_labels = 'https://raw.githubusercontent.com/ClaudiaAda/SUES-Digit/main/All_labels_3.json'
+url_all_labels = 'https://raw.githubusercontent.com/ClaudiaAda/SUES-Digit/main/All_labels4.json'
 response_all_labels = urllib.request.urlopen(url_all_labels)
 info_data = json.loads(response_all_labels.read())
 
@@ -43,36 +42,37 @@ for label in list(info_data.keys()):
       scen_data["node"]["label"].append(label)
       scen_data["node"]["color"].append(info_data[label]["color"])
       i += 1
-          
+
 
 
 for label in scen_data["node"]["label"]:
 
     if info_data[label]["target"] != ("link" and "output"):
       #print(label)
+      for a in range(len(info_data[label]["value"])):
+          
+          if (("T0 " + info_data[label]["target"][a]) and "T0 " + info_data[label]["value"][a]) in scen_labels:
+             
+            #print(info_data[label]["target"][a])
+          
+            target_name = info_data[label]["target"][a]
+            target_position = positions[target_name]
+            scen_data["link"]["target"].append(target_position)
+
+            value_name = info_data[label]["value"][a]
+            
+            find_value = (scen_file["T0 " + value_name][slider])
+            scen_data["link"]["value"].append(find_value)
+            #print(find_value)
+
+            scen_data["link"]["color"].append(info_data[value_name]["color"])
+
+            #scen_data["link"]["color"].append(info_data[target]["color"])
       
-      targets_names = info_data[label]["target"]
-      targets_values = list(map(positions.get, targets_names))
-      scen_data["link"]["target"].extend(targets_values)
+            scen_data["link"]["source"].append(positions[label])
 
-      for index in range(len(targets_names)):
-        scen_data["link"]["source"].extend([positions[label]])
-
-      if len(targets_names) == 1:
-        find_value = (scen_file["T" + year + " " + label][slider])
-        print(find_value)
-        scen_data["link"]["value"].append(find_value)
-
-        scen_data["link"]["color"].append(info_data[label]["color"])
-
-      else:
-        for target in info_data[label]["value"]:
-            if "T0 " + target in scen_labels:
-              find_value = (scen_file["T0 " + target][slider])
-              scen_data["link"]["value"].append(find_value)
-              #print(find_value)
-
-              #scen_data["link"]["color"].append(info_data[target]["color"])
+         
+    
     
 fig = go.Figure(data=[go.Sankey(
     # Define nodes
@@ -98,4 +98,9 @@ print(scen_data["node"]['color'])
 print(scen_data["link"]['source'])
 print(scen_data["link"]['target'])
 print(scen_data["link"]['value'])
+print(len(scen_data["node"]['label']))
+print(len(scen_data["node"]['color']))
+print(len(scen_data["link"]['source']))
+print(len(scen_data["link"]['target']))
+print(len(scen_data["link"]['value']))
 print(positions)
