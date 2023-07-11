@@ -140,45 +140,35 @@
     },
     "DHP sum input energy": {
         "color": "rgba(0,255,1,255)",
-        "target": [
-            "link"
-        ],
+        "target": "link",
         "value": [
             ""
         ]
     },
     "DHP use of Bio gas": {
         "color": "rgba(62,161,97,255)",
-        "target": [
-            "link"
-        ],
+        "target": "link",
         "value": [
             ""
         ]
     },
     "DHP use of oil products": {
         "color": "rgba(92,92,92,255)",
-        "target": [
-            "link"
-        ],
+        "target":  "link",
         "value": [
             ""
         ]
     },
     "CGP use of bio fuels green": {
         "color": "rgba(0,255,1,255)",
-        "target": [
-            "link"
-        ],
+        "target": "link",
         "value": [
             ""
         ]
     },   
     "CGP use of bio oil": {
         "color": "rgba(1,192,193,255)",
-        "target": [
-            "link"
-        ],
+        "target": "link",
         "value": [
             ""
         ]
