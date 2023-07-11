@@ -96,18 +96,30 @@ for label in scen_data["node"]["label"]:
 fig = go.Figure(data=[go.Sankey(
     # Define nodes
     node = dict(
-      pad = 15,
-      thickness = 15,
-      line = dict(color = "black", width = 0.5),
+      pad = 30,
+      thickness = 1,
+      line = dict(color = "black", width = 0.01),
       label =  scen_data["node"]['label'],
-      color =  scen_data["node"]['color']
+      color =  scen_data["node"]['color'],
     ),
     # Add links
     link = dict(
+      arrowlen = 30,
       source =  scen_data["link"]['source'],
       target =  scen_data["link"]['target'],
       color =  scen_data["link"]['color'],
-      value = scen_data["link"]['value']
-))])
+      value = scen_data["link"]['value'],
+    ),
+    textfont = dict(
+      family = "Arial",
+      size = 12,
+    ),
+    selectedpoints= [],
+    valueformat = ".3s",
+    valuesuffix = "",
+
+      
+      )])
+
 
 fig.show()

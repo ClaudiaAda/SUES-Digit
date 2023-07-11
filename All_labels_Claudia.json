@@ -118,7 +118,7 @@
         ]
     },
     "sum electric energy production EEP": {
-        "color": "orange",
+        "color": "rgba(255,127,0,255)",
         "target": [
             "distribution losses",
             "sum energy use homes",
