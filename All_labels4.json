@@ -228,7 +228,7 @@
             "sum energy use Industry"
         ],
         "value": [
-            "distribution losses DHP",
+            "distribution losses CGP",
             "DHP homes",
             "DHP others",
             "DHP Public",
