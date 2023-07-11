@@ -217,10 +217,10 @@
         ],
         "value": [
             "distribution losses CGP",
-            "DHP homes",
-            "DHP others",
-            "DHP Public",
-            "DHP Industry"
+            "CGP homes",
+            "CGP others",
+            "CGP Public",
+            "CGP Industry"
         ]
     },
     "CGP total energy output to users": {
