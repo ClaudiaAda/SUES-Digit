@@ -175,9 +175,7 @@
     },
     "CGP use of oil product": {
         "color": "rgba(92,92,92,255)",
-        "target": [
-            "link"
-        ],
+        "target": "link",
         "value": [
             ""
         ]
