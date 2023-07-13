@@ -13,8 +13,8 @@ valores = [10, 23, 7, 15, 12]
 
 # Crear la figura y el gráfico de barras
 fig = go.Figure(data=[go.Bar(x=etiquetas, y=valores)])
-# Mostrar la figura
-fig.update_layout()
+# Mostrar la figura"""
+figure = fig.update_layout()
 
 
 app = Dash(__name__)
@@ -43,6 +43,7 @@ app.layout = html.Div(
                     children = [
                         html.Div(
                             className = "menu_title",
+                            id = "menu",
                             children = "Choose a scenario:"
                         ),
                         dcc.Dropdown(
@@ -52,10 +53,11 @@ app.layout = html.Div(
                                 {'label' : 'Scenario 1', 'value' : 1 },
                                 {'label' : 'Scenario 2', 'value' : 2 },
                                 {'label' : 'Scenario 3', 'value' : 3 },
-                                {'label' : 'Scenario 4', 'value' : 4 }
+                                {'label' : 'Scenario 4', 'value' : 4 },
+                                {'label' : 'Scenario 5', 'value' : 5 }
                             ],
                             clearable=False,
-                            value=1
+                            value=5
                         )
 
                     ]
@@ -83,10 +85,10 @@ app.layout = html.Div(
 def update_sankey(value):
     num = value
     print(num)
-    if num == 2 :
+    if num == 1 :
         # Datos para el gráfico
         etiquetas = ['A', 'B', 'C', 'D', 'E']
-        valores = [20, 33, 17, 25, 32]
+        valores = [10, 10, 10, 10, 10]
 
         # Crear la figura y el gráfico de barras
         fig = go.Figure(data=[go.Bar(x=etiquetas, y=valores)])
@@ -94,7 +96,44 @@ def update_sankey(value):
         # Mostrar la figura
         fig.update_layout()
 
-    return fig, f'You have selected {value}'
+
+
+    elif num == 2 :
+        # Datos para el gráfico
+        etiquetas = ['A', 'B', 'C', 'D', 'E']
+        valores = [1, 1, 1, 1, 1]
+
+        # Crear la figura y el gráfico de barras
+        fig = go.Figure(data=[go.Bar(x=etiquetas, y=valores)])
+
+        # Mostrar la figura
+        fig.update_layout()
+
+
+
+    elif num == 3 :
+        # Datos para el gráfico
+        etiquetas = ['A', 'B', 'C', 'D', 'E']
+        valores = [5, 5, 5, 5, 5]
+
+        # Crear la figura y el gráfico de barras
+        fig = go.Figure(data=[go.Bar(x=etiquetas, y=valores)])
+
+        # Mostrar la figura
+        fig.update_layout()
+
+    elif num == 4 :
+        # Datos para el gráfico
+        etiquetas = ['A', 'B', 'C', 'D', 'E']
+        valores = [20, 20, 20, 20, 20]
+
+        # Crear la figura y el gráfico de barras
+        fig = go.Figure(data=[go.Bar(x=etiquetas, y=valores)])
+
+        # Mostrar la figura
+        fig.update_layout()
+
+    return fig
 
 
 if __name__ == '__main__':
