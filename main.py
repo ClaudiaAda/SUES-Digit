@@ -59,7 +59,30 @@ app.layout = html.Div(
                             value = "Skara kommun",
                         )
                     ]
-                )
+                ),
+                html.Div(
+                    children = [
+                        html.Label("Year:"),
+                        dcc.Dropdown(
+                            id = "year",
+                            options = [
+                                {'label' : '2023', 'value' : '0' },
+                                {'label' : '2024', 'value' : 1 },
+                                {'label' : '2025', 'value' : 2 },
+                                {'label' : '2026', 'value' : 3 },
+                                {'label' : '2027', 'value' : 4 },
+                                {'label' : '2028', 'value' : 5 },
+                                {'label' : '2029', 'value' : 6 },
+                                {'label' : '2030', 'value' : 7 },
+                                {'label' : '2031', 'value' : 8 },
+                                {'label' : '2032', 'value' : 9 },
+                                {'label' : '2033', 'value' : 10 }
+                            ],
+                            clearable=False,
+                            value=0
+                        )
+                    ]       
+                ),
             ]
         ),
                               
@@ -67,17 +90,18 @@ app.layout = html.Div(
     ]
 )
 
-year = 2
 scen_value = 0.3
 
 
 @app.callback(
     Output("graph", "figure"),
     Input("kommun_menu", "value"),
-    Input("scenario_menu", "value")
+    Input("scenario_menu", "value"),
+    Input("year", "value")
+    
 )
 
-def display_sankey(kommun,scenario):
+def display_sankey(kommun,scenario,year):
 
     # SELECT THE URL OF EACH SCENARIO CASE
     url_scenarios_cases = 'https://raw.githubusercontent.com/ClaudiaAda/SUES-Digit/main/Scenarios_cases.json'
@@ -98,6 +122,7 @@ def display_sankey(kommun,scenario):
 
     print(kommun)
     print(scenario)
+    print(year)
 
     return fig
 
