@@ -80,5 +80,6 @@ def build_scen_data(scen_file, year, scen_value):
 
                     #Also, for each connection, it is added the number of the source    
                     scen_data["link"]["source"].append(positions[label])
+          
         
     return scen_data
