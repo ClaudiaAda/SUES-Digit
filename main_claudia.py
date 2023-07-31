@@ -76,7 +76,7 @@ app.layout = html.Div(
                              ]   
                         ),
                         html.Div(
-                            id = "year_column",
+                            id = "year_column and peak hour",
                             children = [
                                 html.Label("Year:"),
                                 dcc.Dropdown(
@@ -97,6 +97,19 @@ app.layout = html.Div(
                                         {'label' : '2033', 'value' : '10' }
                                     ],
                                     placeholder = "Select a year...",
+                                ),
+                                dcc.Checklist(
+                                    id = "Peak hour",
+                                    options=[
+                                    # {'label': 'Peak hour', 'value': 'on'},
+                                        {
+                                            "label": [
+                                                html.Img(src="/assets/imagen.jpg",height=30),
+                                                html.Span("Peak hour")
+                                            ],
+                                            'value': "on",
+                                        }
+                                    ]
                                 )
                             ]
                         ),
@@ -136,8 +149,6 @@ app.layout = html.Div(
                                             max=1,
                                             step=0.05,
                                             value=None,
-                                            #marks={k: '{}'.format(k) for k in range(0,21)},
-                                            #tooltip={"placement" : "bottom", "always_visible" : True},
                                             id="slider",
                                             #vertical=True   
                                         ),
@@ -167,7 +178,22 @@ app.layout = html.Div(
                                     ]
                                 )
                             ]
+                        ),
+                        html.Div(
+                            id = "units_menu",
+                            children = [
+                                dcc.Dropdown(
+                                    id = "unit",
+                                    options = [
+                                        {'label' : 'Kwh', 'value' : 'kilo' },
+                                        {'label' : 'Mwh', 'value' : 'mega' },
+                                        {'label' : 'Gwh', 'value' : 'giga' }
+                                    ],
+                                    placeholder = "Select a unit..."
+                                )
+                            ]
                         )
+
                     ]
                 )
             ],
@@ -213,7 +239,7 @@ app.layout = html.Div(
     Output("slider_scale2", "children"),
     Output("slider", "value"),
     Output("slider2", "value"),
-    #Output("slider", "marks"),
+
     Input("scenario_menu", "value"),
     State("slider", "min"),
     State("slider", "max"),
@@ -224,7 +250,7 @@ app.layout = html.Div(
     State("slider2", "step"),
     State("slider", "value"),
     State("slider2", "value"),
-    #State("slider", "marks")
+
     )
 
 def update_output(value, min, max, step, style, min2, max2, step2, val, val2):
@@ -235,7 +261,7 @@ def update_output(value, min, max, step, style, min2, max2, step2, val, val2):
         style = {"visibility": "hidden"}
         val = None
         val2 = 0
-        return (min, max, step, f"%",style, min2, max2, step2, f" ",val, val2) #{k: '{}'.format(k) for k in range(min,max+1)}
+        return (min, max, step, f"%",style, min2, max2, step2, f" ",val, val2) 
     if value == 2:  
         min=0
         max=3
@@ -282,7 +308,22 @@ def update_output(value, min, max, step, style, min2, max2, step2, val, val2):
         val = None
         val2 = 0
         return (min, max, step, f"units",style, min2, max2, step2, f" ",val,val2)
+
+
+@app.callback(
+    Output("unit", "options"),
+    Input("Peak hour", "value")
+)
+
+def unit_menu(valueC):
     
+    if valueC == ['on']:
+        #valueC = 'on' 
+        return ['Kw', 'Mw', 'Gw']
+    else: 
+        #valueC = 'off'
+        return ['Kwh', 'Mwh', 'Gwh']
+
    
 # VARIABLES NEEDED
 año = '0'
@@ -300,11 +341,13 @@ info_scenarios_cases = json.loads(response_scenario_cases.read())
     Input("kommun_menu", "value"),
     Input("scenario_menu", "value"),
     Input("years", "value"),
+    Input("Peak hour", "value"),
     Input("slider","value"),
-    Input("slider2","value")
+    Input("slider2","value"),
+    Input("unit", "value")
 )
 
-def display_sankey(kommun,scenario,years,value_slider,value_slider2):
+def display_sankey(kommun,scenario,years,peak_hour,value_slider,value_slider2,unit):
 
     if (kommun is None) or (scenario is None) or (years is None) or (value_slider is None):
         raise PreventUpdate
@@ -313,6 +356,7 @@ def display_sankey(kommun,scenario,years,value_slider,value_slider2):
         print(kommun)
         print(scenario)
         print(years)
+        print(peak_hour)
         print(value_slider)
         print(value_slider2)
 
