@@ -1,4 +1,4 @@
-from dash import Dash, dcc, html, Input, Output, callback, State
+from dash import Dash, dcc, html, Input, Output, State
 from dash.exceptions import PreventUpdate
 import pandas as pd
 import json, urllib, requests
@@ -34,7 +34,7 @@ app.layout = html.Div(
             children = [
                 html.Div(
                     id = "first_row",
-                    style = { "padding-bottom" : 20},
+                    #To put distance between elements: style = { "padding-bottom" : 20},
                     children =[
                         html.Div(
                             id = "kommun_column",
@@ -81,7 +81,7 @@ app.layout = html.Div(
                                 html.Label("Year:"),
                                 dcc.Dropdown(
                                     id = "years",
-                                    #To put distance between elements: optionHeight = 20,
+                                    optionHeight = 20,
                                     maxHeight = 500,
                                     options = [
                                         {'label' : '2023', 'value' : '0' },
@@ -113,13 +113,13 @@ app.layout = html.Div(
                                 dcc.Dropdown(
                                     id = "scenario_menu",
                                     options = [
-                                        {'label' : 'Scenario 1 - Ratio of EVs', 'value' : "1" },
-                                        {'label' : 'Scenario 2 - New industry establishment NIE', 'value' : "2" },
-                                        {'label' : 'Scenario 3 - New Houses - ratio New houses DHP user', 'value' : "3" },
-                                        {'label' : 'Scenario 4 - Goal ratio DHP users small houses - users apartment buildings', 'value' : "4" },
-                                        {'label' : 'Scenario 5 - no large solar panel projects', 'value' : "5" },
-                                        {'label' : 'Scenario 6 - no large wind mill projects', 'value' : "6" },
-                                        {'label' : 'Scenario All', 'value' : "7" }
+                                        {'label' : 'Scenario 1 - Ratio of EVs', 'value' : 1 },
+                                        {'label' : 'Scenario 2 - New industry establishment NIE', 'value' : 2 },
+                                        {'label' : 'Scenario 3 - New Houses - ratio New houses DHP user', 'value' : 3 },
+                                        {'label' : 'Scenario 4 - Goal ratio DHP users small houses - users apartment buildings', 'value' : 4 },
+                                        {'label' : 'Scenario 5 - no large solar panel projects', 'value' : 5 },
+                                        {'label' : 'Scenario 6 - no large wind mill projects', 'value' : 6 },
+                                        {'label' : 'Scenario All', 'value' : 7 }
                                     ],
                                     placeholder = "Select a scenario..."
                                 )
@@ -135,7 +135,7 @@ app.layout = html.Div(
                                             min=0,
                                             max=1,
                                             step=0.05,
-                                            value=0,
+                                            value=None,
                                             #marks={k: '{}'.format(k) for k in range(0,21)},
                                             #tooltip={"placement" : "bottom", "always_visible" : True},
                                             id="slider",
@@ -156,7 +156,7 @@ app.layout = html.Div(
                                             min=0,
                                             max=1,
                                             step=0.25,
-                                            value=0,
+                                            value=None,
                                             id="slider2",
                                         ),
                                         dcc.Markdown(
@@ -211,6 +211,8 @@ app.layout = html.Div(
     Output("slider2", "max"),
     Output("slider2", "step"),        
     Output("slider_scale2", "children"),
+    Output("slider", "value"),
+    Output("slider2", "value"),
     #Output("slider", "marks"),
     Input("scenario_menu", "value"),
     State("slider", "min"),
@@ -220,22 +222,28 @@ app.layout = html.Div(
     State("slider2", "min"),
     State("slider2", "max"),
     State("slider2", "step"),
+    State("slider", "value"),
+    State("slider2", "value"),
     #State("slider", "marks")
     )
 
-def update_output(value, min, max, step, style, min2, max2, step2):
+def update_output(value, min, max, step, style, min2, max2, step2, val, val2):
     if value == 1:  
         min=0
         max=1
         step=0.05
         style = {"visibility": "hidden"}
-        return (min, max, step, f"%",style, min2, max2, step2, f" ")   #{k: '{}'.format(k) for k in range(min,max+1)}
+        val = None
+        val2 = 0
+        return (min, max, step, f"%",style, min2, max2, step2, f" ",val, val2) #{k: '{}'.format(k) for k in range(min,max+1)}
     if value == 2:  
         min=0
         max=3
         step=1
         style = {"visibility": "hidden"}
-        return (min, max, step, f"units",style, min2, max2, step2, f" ")   
+        val = None
+        val2 = 0
+        return (min, max, step, f"units",style, min2, max2, step2, f" ",val,val2)   
     if value == 3:  
         min=0
         max=300
@@ -244,7 +252,9 @@ def update_output(value, min, max, step, style, min2, max2, step2):
         max2=1
         step2=0.25
         style={"visibility": "visible"}
-        return (min, max, step, f"units",style, min2, max2, step2, f"%")
+        val = None
+        val2 = 0
+        return (min, max, step, f"units",style, min2, max2, step2, f"%",val,val2)
     if value == 4:  
         min=0.2
         max=1
@@ -253,23 +263,28 @@ def update_output(value, min, max, step, style, min2, max2, step2):
         max2=1
         step2=0.01
         style={"visibility": "visible"}
-        return (min, max, step, f"%",style, min2, max2, step2, f"%")
+        val = None
+        val2 = 0
+        return (min, max, step, f"%",style, min2, max2, step2, f"%",val,val2 )
     if value == 5:  
         min=0
         max=12
         step=1
         style = {"visibility": "hidden"}
-        return (min, max, step, f"units",style, min2, max2, step2, f" ")
+        val = None
+        val2 = 0
+        return (min, max, step, f"units",style, min2, max2, step2, f" ",val,val2)
     if value == 6:  
         min=0
         max=2
         step=1
         style = {"visibility": "hidden"}
-        return (min, max, step, f"units",style, min2, max2, step2, f" ")
-
-
+        val = None
+        val2 = 0
+        return (min, max, step, f"units",style, min2, max2, step2, f" ",val,val2)
+    
+   
 # VARIABLES NEEDED
-scen_value=0
 año = '0'
 value_condition = ""
 
@@ -291,7 +306,7 @@ info_scenarios_cases = json.loads(response_scenario_cases.read())
 
 def display_sankey(kommun,scenario,years,value_slider,value_slider2):
 
-    if (kommun is None) or (scenario is None) or (years is None):
+    if (kommun is None) or (scenario is None) or (years is None) or (value_slider is None):
         raise PreventUpdate
     
     else:
@@ -299,6 +314,7 @@ def display_sankey(kommun,scenario,years,value_slider,value_slider2):
         print(scenario)
         print(years)
         print(value_slider)
+        print(value_slider2)
 
         #print(info_scenarios_cases[kommun][scenario])
         # Save the correct excel file
@@ -314,10 +330,10 @@ def display_sankey(kommun,scenario,years,value_slider,value_slider2):
         s_e_production = scen_file["T" + years + " sum energy production"][value_slider]
         s_e_usage = scen_file["T" + years + " sum energy usage"][value_slider]
 
-        print(s_e_production)
-        print(s_e_usage)
+        #print(s_e_production)
+        #print(s_e_usage)
 
-        return fig, s_e_production, s_e_usage
+        return fig
     
     
 
