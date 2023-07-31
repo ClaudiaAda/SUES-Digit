@@ -1,4 +1,5 @@
-from dash import Dash, dcc, html, Input, Output
+from dash import Dash, dcc, html, Input, Output, callback, State
+from dash.exceptions import PreventUpdate
 import pandas as pd
 import json, urllib, requests
 import plotly.graph_objects as go
@@ -33,11 +34,11 @@ app.layout = html.Div(
             children = [
                 html.Div(
                     id = "first_row",
-                    style = { "padding-bottom" : 20, "maxHeight":5000},
+                    style = { "padding-bottom" : 20},
                     children =[
                         html.Div(
                             id = "kommun_column",
-                            #style = {"columnCount" : 1},
+                            #style = {"columnCount" : 2},
                             children = [
                                 html.Label('Västra Götalands Iän'),
                                 dcc.Dropdown(
@@ -80,7 +81,7 @@ app.layout = html.Div(
                                 html.Label("Year:"),
                                 dcc.Dropdown(
                                     id = "years",
-                                    optionHeight = 20,
+                                    #To put distance between elements: optionHeight = 20,
                                     maxHeight = 500,
                                     options = [
                                         {'label' : '2023', 'value' : '0' },
@@ -103,7 +104,7 @@ app.layout = html.Div(
                 ),
                 html.Div(
                     id = "scenario_area",
-                    style = {"columnCount":2},
+                    #style = {"columnCount":2},
                     children = [
                         html.Div(
                             id = "scenario_menu_column",
@@ -112,12 +113,12 @@ app.layout = html.Div(
                                 dcc.Dropdown(
                                     id = "scenario_menu",
                                     options = [
-                                        {'label' : 'Scenario 1', 'value' : "1" },
-                                        {'label' : 'Scenario 2', 'value' : "2" },
-                                        {'label' : 'Scenario 3', 'value' : "3" },
-                                        {'label' : 'Scenario 4', 'value' : "4" },
-                                        {'label' : 'Scenario 5', 'value' : "5" },
-                                        {'label' : 'Scenario 6', 'value' : "6" },
+                                        {'label' : 'Scenario 1 - Ratio of EVs', 'value' : "1" },
+                                        {'label' : 'Scenario 2 - New industry establishment NIE', 'value' : "2" },
+                                        {'label' : 'Scenario 3 - New Houses - ratio New houses DHP user', 'value' : "3" },
+                                        {'label' : 'Scenario 4 - Goal ratio DHP users small houses - users apartment buildings', 'value' : "4" },
+                                        {'label' : 'Scenario 5 - no large solar panel projects', 'value' : "5" },
+                                        {'label' : 'Scenario 6 - no large wind mill projects', 'value' : "6" },
                                         {'label' : 'Scenario All', 'value' : "7" }
                                     ],
                                     placeholder = "Select a scenario..."
@@ -127,22 +128,150 @@ app.layout = html.Div(
                         html.Div(
                             id = "scenario_slider_column",
                             children = [
-                                html.Label("Place for the slider")
+                                html.Label("Place for the slider"),
+                                html.Div(
+                                    children = [
+                                        dcc.Slider(
+                                            min=0,
+                                            max=1,
+                                            step=0.05,
+                                            value=0,
+                                            #marks={k: '{}'.format(k) for k in range(0,21)},
+                                            #tooltip={"placement" : "bottom", "always_visible" : True},
+                                            id="slider",
+                                            #vertical=True   
+                                        ),
+                                        dcc.Markdown(
+                                            id="slider_scale",
+                                            children ="",
+                                            style = {"textAlign" : "right"}
+                                        )
+                                    ]
+                                ),
+                                html.Div(
+                                    id = "invisible_slider",
+                                    style = {"visibility" : "hidden"},
+                                    children = [
+                                        dcc.Slider(
+                                            min=0,
+                                            max=1,
+                                            step=0.25,
+                                            value=0,
+                                            id="slider2",
+                                        ),
+                                        dcc.Markdown(
+                                            id="slider_scale2",
+                                            children ="", 
+                                            style = {"textAlign" : "right"}   
+                                        )
+                                    ]
+                                )
                             ]
                         )
                     ]
                 )
             ],
         ),
-
+        html.Div(
+            id = "display_area",
+            children = [
+                html.Div(
+                    id = "sum_energy",
+                    style = {"columnCount":2},
+                    children = [
+                        html.Div(                     
+                            children = [
+                                html.Label("Sum Energy Production"),
+                                html.P(id = "sum_energy_production")
+                            ]
+                        ),
+                        html.Div(
+                            children = [
+                                html.Label("Sum Energy Usage"),
+                                html.P(id = "sum_energy_usage")
+                            ]
+                        )
+                    ]
+                )
+            ]
+        ),
         dcc.Graph(id = "graph", figure= fig)
     ],
 )
 
-#VARIABLES NEEDED
+# Assign properties to the sliders
 
-scen_value = 0
+@app.callback(
+    Output("slider", "min"),
+    Output("slider", "max"),
+    Output("slider", "step"),
+    Output("slider_scale", "children"),
+    Output("invisible_slider", "style"),
+    Output("slider2", "min"),
+    Output("slider2", "max"),
+    Output("slider2", "step"),        
+    Output("slider_scale2", "children"),
+    #Output("slider", "marks"),
+    Input("scenario_menu", "value"),
+    State("slider", "min"),
+    State("slider", "max"),
+    State("slider", "step"),
+    State("invisible_slider", "style"),
+    State("slider2", "min"),
+    State("slider2", "max"),
+    State("slider2", "step"),
+    #State("slider", "marks")
+    )
+
+def update_output(value, min, max, step, style, min2, max2, step2):
+    if value == 1:  
+        min=0
+        max=1
+        step=0.05
+        style = {"visibility": "hidden"}
+        return (min, max, step, f"%",style, min2, max2, step2, f" ")   #{k: '{}'.format(k) for k in range(min,max+1)}
+    if value == 2:  
+        min=0
+        max=3
+        step=1
+        style = {"visibility": "hidden"}
+        return (min, max, step, f"units",style, min2, max2, step2, f" ")   
+    if value == 3:  
+        min=0
+        max=300
+        step=25
+        min2=0
+        max2=1
+        step2=0.25
+        style={"visibility": "visible"}
+        return (min, max, step, f"units",style, min2, max2, step2, f"%")
+    if value == 4:  
+        min=0.2
+        max=1
+        step=0.1
+        min2=0.96
+        max2=1
+        step2=0.01
+        style={"visibility": "visible"}
+        return (min, max, step, f"%",style, min2, max2, step2, f"%")
+    if value == 5:  
+        min=0
+        max=12
+        step=1
+        style = {"visibility": "hidden"}
+        return (min, max, step, f"units",style, min2, max2, step2, f" ")
+    if value == 6:  
+        min=0
+        max=2
+        step=1
+        style = {"visibility": "hidden"}
+        return (min, max, step, f"units",style, min2, max2, step2, f" ")
+
+
+# VARIABLES NEEDED
+scen_value=0
 año = '0'
+value_condition = ""
 
 # SELECT THE URL OF EACH SCENARIO CASE
 url_scenarios_cases = 'https://raw.githubusercontent.com/ClaudiaAda/SUES-Digit/main/Scenarios_cases3.json'
@@ -151,30 +280,46 @@ info_scenarios_cases = json.loads(response_scenario_cases.read())
 
 @app.callback(
     Output("graph", "figure"),
+    Output("sum_energy_production", "children"),
+    Output("sum_energy_usage", "children"),
     Input("kommun_menu", "value"),
     Input("scenario_menu", "value"),
-    Input("years", "value")
+    Input("years", "value"),
+    Input("slider","value"),
+    Input("slider2","value")
 )
 
-def display_sankey(kommun,scenario,years):
+def display_sankey(kommun,scenario,years,value_slider,value_slider2):
 
-    print(kommun)
-    print(scenario)
-    print(years)
-
-    #print(info_scenarios_cases[kommun][scenario])
-    #Save the correct excel file
-    scen_file = pd.read_csv(info_scenarios_cases[kommun][scenario])
- 
-    # Create a dictionary with the information selected 
-    scen_data = build_scen_data(scen_file, years, scen_value)
-
-
-    # Display a sankey diagram with the information
-    fig = build_sankey(scen_data)
-    fig.update_layout()
+    if (kommun is None) or (scenario is None) or (years is None):
+        raise PreventUpdate
     
-    return fig
+    else:
+        print(kommun)
+        print(scenario)
+        print(years)
+        print(value_slider)
+
+        #print(info_scenarios_cases[kommun][scenario])
+        # Save the correct excel file
+        scen_file = pd.read_csv(info_scenarios_cases[kommun][scenario])
+    
+        # Create a dictionary with the information selected 
+        scen_data = build_scen_data(scen_file, years, scenario,value_slider,value_slider2)
+
+        # Display a sankey diagram with the information
+        fig = build_sankey(scen_data)
+        fig.update_layout()
+        
+        s_e_production = scen_file["T" + years + " sum energy production"][value_slider]
+        s_e_usage = scen_file["T" + years + " sum energy usage"][value_slider]
+
+        print(s_e_production)
+        print(s_e_usage)
+
+        return fig, s_e_production, s_e_usage
+    
+    
 
 app.run_server(debug=True)
 
