@@ -126,13 +126,13 @@ app.layout = html.Div(
                                 dcc.Dropdown(
                                     id = "scenario_menu",
                                     options = [
-                                        {'label' : 'Scenario 1 - Ratio of EVs', 'value' : 1 },
-                                        {'label' : 'Scenario 2 - New industry establishment NIE', 'value' : 2 },
-                                        {'label' : 'Scenario 3 - New Houses - ratio New houses DHP user', 'value' : 3 },
-                                        {'label' : 'Scenario 4 - Goal ratio DHP users small houses - users apartment buildings', 'value' : 4 },
-                                        {'label' : 'Scenario 5 - no large solar panel projects', 'value' : 5 },
-                                        {'label' : 'Scenario 6 - no large wind mill projects', 'value' : 6 },
-                                        {'label' : 'Scenario All', 'value' : 7 }
+                                        {'label' : 'Scenario 1 - Ratio of EVs', 'value' : "1" },
+                                        {'label' : 'Scenario 2 - New industry establishment NIE', 'value' : "2" },
+                                        {'label' : 'Scenario 3 - New Houses - ratio New houses DHP user', 'value' : "3" },
+                                        {'label' : 'Scenario 4 - users apartment buildings - Goal ratio DHP users small houses', 'value' : "4" },
+                                        {'label' : 'Scenario 5 - no large solar panel projects', 'value' : "5" },
+                                        {'label' : 'Scenario 6 - no large wind mill projects', 'value' : "6" },
+                                        {'label' : 'Scenario All', 'value' : "7" }
                                     ],
                                     placeholder = "Select a scenario..."
                                 )
@@ -193,7 +193,6 @@ app.layout = html.Div(
                                 )
                             ]
                         )
-
                     ]
                 )
             ],
@@ -254,23 +253,23 @@ app.layout = html.Div(
     )
 
 def update_output(value, min, max, step, style, min2, max2, step2, val, val2):
-    if value == 1:  
+    if value == "1":  
         min=0
         max=1
         step=0.05
         style = {"visibility": "hidden"}
         val = None
-        val2 = 0
-        return (min, max, step, f"%",style, min2, max2, step2, f" ",val, val2) 
-    if value == 2:  
+        val2 = None
+        return (min, max, step, f"%",style, min2, max2, step2, f" ",val, val2) #{k: '{}'.format(k) for k in range(min,max+1)}
+    if value == "2":  
         min=0
         max=3
         step=1
         style = {"visibility": "hidden"}
         val = None
-        val2 = 0
+        val2 = None
         return (min, max, step, f"units",style, min2, max2, step2, f" ",val,val2)   
-    if value == 3:  
+    if value == "3":  
         min=0
         max=300
         step=25
@@ -279,37 +278,36 @@ def update_output(value, min, max, step, style, min2, max2, step2, val, val2):
         step2=0.25
         style={"visibility": "visible"}
         val = None
-        val2 = 0
+        val2 = None
         return (min, max, step, f"units",style, min2, max2, step2, f"%",val,val2)
-    if value == 4:  
-        min=0.2
+    if value == "4":  
+        min=0.96
         max=1
-        step=0.1
-        min2=0.96
+        step=0.01
+        min2=0.2
         max2=1
-        step2=0.01
+        step2=0.1
         style={"visibility": "visible"}
         val = None
-        val2 = 0
+        val2 = None
         return (min, max, step, f"%",style, min2, max2, step2, f"%",val,val2 )
-    if value == 5:  
+    if value == "5":  
         min=0
         max=12
         step=1
         style = {"visibility": "hidden"}
         val = None
-        val2 = 0
+        val2 = None
         return (min, max, step, f"units",style, min2, max2, step2, f" ",val,val2)
-    if value == 6:  
+    if value == "6":  
         min=0
         max=2
         step=1
         style = {"visibility": "hidden"}
         val = None
-        val2 = 0
+        val2 = None
         return (min, max, step, f"units",style, min2, max2, step2, f" ",val,val2)
-
-
+    
 @app.callback(
     Output("unit", "options"),
     Input("Peak hour", "value")
@@ -322,8 +320,7 @@ def unit_menu(valueC):
         return ['Kw', 'Mw', 'Gw']
     else: 
         #valueC = 'off'
-        return ['Kwh', 'Mwh', 'Gwh']
-
+        return ['Kwh', 'Mwh', 'Gwh']  
    
 # VARIABLES NEEDED
 año = '0'
@@ -341,13 +338,13 @@ info_scenarios_cases = json.loads(response_scenario_cases.read())
     Input("kommun_menu", "value"),
     Input("scenario_menu", "value"),
     Input("years", "value"),
-    Input("Peak hour", "value"),
     Input("slider","value"),
     Input("slider2","value"),
+    Input("Peak hour", "value"),
     Input("unit", "value")
 )
 
-def display_sankey(kommun,scenario,years,peak_hour,value_slider,value_slider2,unit):
+def display_sankey(kommun,scenario,years,value_slider,value_slider2, peak_hour, unit):
 
     if (kommun is None) or (scenario is None) or (years is None) or (value_slider is None):
         raise PreventUpdate
@@ -356,7 +353,6 @@ def display_sankey(kommun,scenario,years,peak_hour,value_slider,value_slider2,un
         print(kommun)
         print(scenario)
         print(years)
-        print(peak_hour)
         print(value_slider)
         print(value_slider2)
 
@@ -365,19 +361,16 @@ def display_sankey(kommun,scenario,years,peak_hour,value_slider,value_slider2,un
         scen_file = pd.read_csv(info_scenarios_cases[kommun][scenario])
     
         # Create a dictionary with the information selected 
-        scen_data = build_scen_data(scen_file, years, scenario,value_slider,value_slider2)
+        (scen_data, s_e_production, s_e_usage) = build_scen_data(scen_file, years, scenario,value_slider,value_slider2, peak_hour, unit)
+        print("Data hecho")
 
         # Display a sankey diagram with the information
         fig = build_sankey(scen_data)
         fig.update_layout()
+        print("Sankey hecho")
         
-        s_e_production = scen_file["T" + years + " sum energy production"][value_slider]
-        s_e_usage = scen_file["T" + years + " sum energy usage"][value_slider]
 
-        #print(s_e_production)
-        #print(s_e_usage)
-
-        return fig
+        return fig, s_e_production, s_e_usage
     
     
 
