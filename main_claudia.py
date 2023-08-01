@@ -99,7 +99,7 @@ app.layout = html.Div(
                                     placeholder = "Select a year...",
                                 ),
                                 dcc.Checklist(
-                                    id = "Peak hour",
+                                    id = "peak_hour",
                                     options=[
                                     # {'label': 'Peak hour', 'value': 'on'},
                                         {
@@ -310,17 +310,27 @@ def update_output(value, min, max, step, style, min2, max2, step2, val, val2):
     
 @app.callback(
     Output("unit", "options"),
-    Input("Peak hour", "value")
+    Input("peak_hour", "value")
 )
 
-def unit_menu(valueC):
+def unit_menu(value):
     
-    if valueC == ['on']:
-        #valueC = 'on' 
-        return ['Kw', 'Mw', 'Gw']
+    if value == ['on']:
+        #value = 'on' 
+        options = [
+            {'label' : 'Kw', 'value' : 'kilo' },
+            {'label' : 'Mw', 'value' : 'mega' },
+            {'label' : 'Gw', 'value' : 'giga' }
+        ]
+        return options
     else: 
-        #valueC = 'off'
-        return ['Kwh', 'Mwh', 'Gwh']  
+        #value = 'off'
+        options = [
+            {'label' : 'Kwh', 'value' : 'kilo' },
+            {'label' : 'Mwh', 'value' : 'mega' },
+            {'label' : 'Gwh', 'value' : 'giga' }
+        ]
+        return options 
    
 # VARIABLES NEEDED
 año = '0'
@@ -340,7 +350,7 @@ info_scenarios_cases = json.loads(response_scenario_cases.read())
     Input("years", "value"),
     Input("slider","value"),
     Input("slider2","value"),
-    Input("Peak hour", "value"),
+    Input("peak_hour", "value"),
     Input("unit", "value")
 )
 
@@ -355,6 +365,8 @@ def display_sankey(kommun,scenario,years,value_slider,value_slider2, peak_hour, 
         print(years)
         print(value_slider)
         print(value_slider2)
+        print(peak_hour)
+        print(unit)
 
         #print(info_scenarios_cases[kommun][scenario])
         # Save the correct excel file
