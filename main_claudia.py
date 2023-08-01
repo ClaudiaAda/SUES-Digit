@@ -206,14 +206,14 @@ app.layout = html.Div(
                     children = [
                         html.Div(                     
                             children = [
-                                html.Label("Sum Energy Production"),
-                                html.P(id = "sum_energy_production")
+                                html.P(id="text_sum_energy_production", children="Sum Energy Production"),
+                                html.P(id="sum_energy_production")
                             ]
                         ),
                         html.Div(
                             children = [
-                                html.Label("Sum Energy Usage"),
-                                html.P(id = "sum_energy_usage")
+                                html.P(id="text_sum_energy_usage", children="Sum Energy Usage "),
+                                html.P(id="sum_energy_usage")
                             ]
                         )
                     ]
@@ -331,6 +331,31 @@ def unit_menu(value):
             {'label' : 'Gwh', 'value' : 'giga' }
         ]
         return options 
+    
+
+@app.callback(
+    Output("text_sum_energy_production", "children"),
+    Output("text_sum_energy_usage", "children"),
+    Input("peak_hour", "value"),
+    Input("unit", "value")
+)
+
+def update_sum_unit(check_item, units):
+    if check_item == ['on']: 
+        if units == 'kilo':
+            return f"Sum Energy Production (Kw):", f"Sum Energy Usage (Mw):"
+        if units == 'mega':
+            return f"Sum Energy Production (Mw):", f"Sum Energy Usage (Mw):"
+        if units == 'giga':
+            return f"Sum Energy Production (Gw):", f"Sum Energy Usage (Gw):"
+    else: 
+        if units == 'kilo':
+            return  f"Sum Energy Production (Kwh):", f"Sum Energy Usage (Kwh):"
+        if units == 'mega':
+            return  f"Sum Energy Production (Mwh):", f"Sum Energy Usage (Mwh):"
+        if units == 'giga':
+            return  f"Sum Energy Production (Gwh):", f"Sum Energy Usage (Gwh):"
+
    
 # VARIABLES NEEDED
 año = '0'
