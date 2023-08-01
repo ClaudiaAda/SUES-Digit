@@ -6,7 +6,8 @@
         ],
         "value": [
             "electic energy import"
-        ]
+        ],
+        "x": 0
     },
     "electric energy water": {
         "color": "rgba(255,127,0,255)",    
@@ -15,7 +16,8 @@
         ],
         "value": [
             "electric energy water"
-        ]
+        ],
+        "x": 0.2
     },
     "electric energy wind": {
         "color": "rgba(255,127,0,255)",
@@ -24,7 +26,8 @@
         ],
         "value": [
             "electric energy wind"
-        ]
+        ],
+        "x": 0.2
     },
     "electric energy solar": {
         "color": "rgba(255,127,0,255)",
@@ -33,7 +36,8 @@
         ],
         "value": [
             "electric energy solar"
-        ]
+        ],
+        "x": 0.3
     },
     "sum bio fuels green": {
         "color": "rgba(0,255,1,255)",
