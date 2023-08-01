@@ -362,13 +362,15 @@ def display_sankey(kommun,scenario,years,value_slider,value_slider2, peak_hour, 
     
         # Create a dictionary with the information selected 
         (scen_data, s_e_production, s_e_usage) = build_scen_data(scen_file, years, scenario,value_slider,value_slider2, peak_hour, unit)
-        print("Data hecho")
+        #print("Data hecho")
 
         # Display a sankey diagram with the information
         fig = build_sankey(scen_data)
         fig.update_layout()
-        print("Sankey hecho")
+        #print("Sankey hecho")
         
+        print(peak_hour)
+        print(unit)
 
         return fig, s_e_production, s_e_usage
     
