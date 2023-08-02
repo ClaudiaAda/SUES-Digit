@@ -19,7 +19,7 @@
             "electric energy water"
         ],
         "column": 1,
-        "x": 0.2
+        "x": 0.1
     },
     "electric energy wind": {
         "color": "rgba(255,127,0,255)",
@@ -30,7 +30,7 @@
             "electric energy wind"
         ],
         "column": 1,
-        "x": 0.2
+        "x": 0.1
     },
     "electric energy solar": {
         "color": "rgba(255,127,0,255)",
@@ -41,7 +41,7 @@
             "electric energy solar"
         ],
         "column": 1,
-        "x": 0.3
+        "x": 0.15
     },
     "sum bio fuels green": {
         "color": "rgba(0,255,1,255)",
