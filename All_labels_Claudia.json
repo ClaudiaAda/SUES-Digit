@@ -151,7 +151,7 @@
             "electricity Industry",
             "electricity Transports"
         ],
-        "position": 2
+        "column": 2
     },
     "DHP sum input energy": {
         "color": "rgba(0,255,1,255)",
@@ -159,7 +159,7 @@
         "value": [
             ""
         ],
-        "position": 2
+        "column": 2
     },
     "DHP use of Bio gas": {
         "color": "rgba(62,161,97,255)",
@@ -167,7 +167,7 @@
         "value": [
             ""
         ],
-        "position": 2
+        "column": 2
     },
     "DHP use of oil products": {
         "color": "rgba(92,92,92,255)",
@@ -175,7 +175,7 @@
         "value": [
             ""
         ],
-        "position": 2
+        "column": 2
     },
     "CGP use of bio fuels green": {
         "color": "rgba(0,255,1,255)",
@@ -183,7 +183,7 @@
         "value": [
             ""
         ],
-        "position": 2
+        "column": 2
     },   
     "CGP use of bio oil": {
         "color": "rgba(1,192,193,255)",
@@ -191,7 +191,7 @@
         "value": [
             ""
         ],
-        "position": 2
+        "column": 2
     },
     "CGP use of oil product": {
         "color": "rgba(92,92,92,255)",
@@ -199,7 +199,7 @@
         "value": [
             ""
         ],
-        "position": 2
+        "column": 2
     },
     "DHP output": {
         "color": "rgba(127,128,0,255)",
@@ -217,7 +217,7 @@
             "DHP Public",
             "DHP Industry"
         ],
-        "position": 2
+        "column": 2
     },
     "electric production CGP": {
         "color": "rgba(255,127,0,255)",
@@ -227,7 +227,7 @@
         "value": [
             "electric production CGP"
         ],
-        "position": 2
+        "column": 2
     },
     "CGP output excl Electric production": {
         "color": "rgba(127,128,0,255)",
@@ -245,7 +245,7 @@
             "CGP Public",
             "CGP Industry"
         ],
-        "position": 2
+        "column": 2
     },
     "CGP total energy output to users": {
         "color": "grey",
@@ -257,42 +257,42 @@
             "electric production CGP",
             "CGP output excl Electric production"
         ],
-        "position": 2
+        "column": 2
     },
     "distribution losses": {
         "color": "white",
         "target": "output",
-        "position": 3 
+        "column": 3 
     },
     "sum energy use homes": {
         "color": "white",
         "target": "output",
-        "position": 3 
+        "column": 3 
     },
     "sum energy use others": {
         "color": "white",
         "target": "output",
-        "position": 3 
+        "column": 3 
     },
     "sum energy use Public": {
         "color": "white",
         "target": "output",
-        "position": 3 
+        "column": 3 
     },
     "sum energy use Agriculture and forrestry": {
         "color": "white",
         "target": "output",
-        "position": 3 
+        "column": 3 
     },
     "sum energy use Industry": {
         "color": "white",
         "target": "output",
-        "position": 3 
+        "column": 3 
     },
     "sum energy use Transports": {
         "color": "white",
         "target": "output",
-        "position": 3 
+        "column": 3 
     },
     "distribution losses from EEP": {
         "color": "rgba(255,127,0,255)",
