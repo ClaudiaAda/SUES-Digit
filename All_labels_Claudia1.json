@@ -322,7 +322,7 @@
         "color": "rgba(92,92,92,255)",
         "target": "link"
     },  
-    "electricity other": {
+    "electricity others": {
         "color": "rgba(255,127,0,255)",
         "target": "link"
     },
