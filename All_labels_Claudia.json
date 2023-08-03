@@ -126,7 +126,7 @@
             "oil others",
             "oil Public",
             "oil Agriculture and forrestry",
-            "Oil industry",          
+            "oil industry",          
             "oil transports"                
         ],
         "column": 1
@@ -378,7 +378,7 @@
         "color": "rgba(1,192,193,255)",
         "target": "link"
     },
-    "oil industry": {
+    "Oil industry": {
         "color": "rgba(92,92,92,255)",
         "target": "link"
     },
