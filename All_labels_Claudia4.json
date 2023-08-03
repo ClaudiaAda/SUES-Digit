@@ -1,0 +1,402 @@
+{
+    "electic energy import": {
+        "color": "rgba(255,127,0,255)",
+        "target": [
+            "sum electric energy production EEP"
+        ],
+        "value": [
+            "electic energy import"
+        ],
+        "column": 1,
+        "x": 0
+    },
+    "electric energy water": {
+        "color": "rgba(255,127,0,255)",    
+        "target": [
+            "sum electric energy production EEP"
+        ],
+        "value": [
+            "electric energy water"
+        ],
+        "column": 1,
+        "x": 0.1
+    },
+    "electric energy wind": {
+        "color": "rgba(255,127,0,255)",
+        "target": [
+            "sum electric energy production EEP"
+        ],
+        "value": [
+            "electric energy wind"
+        ],
+        "column": 1,
+        "x": 0.1
+    },
+    "electric energy solar": {
+        "color": "rgba(255,127,0,255)",
+        "target": [
+            "sum electric energy production EEP"
+        ],
+        "value": [
+            "electric energy solar"
+        ],
+        "column": 1,
+        "x": 0.15
+    },
+    "sum bio fuels green": {
+        "color": "rgba(0,255,1,255)",
+        "target": [
+            "sum energy use homes",
+            "sum energy use Industry",
+            "DHP output",
+            "CGP total energy output to users"         
+        ],
+        "value": [
+            "bio fuels small houses direct heating green",
+            "bio fuels Industry green",
+            "DHP sum input energy",
+            "CGP use of bio fuels green"
+        ],
+        "column": 1
+    },
+    "Propane and natural gas Industry": {
+        "color": "rgba(128,65,1,255)",
+        "target": [
+            "sum energy use Industry"
+        ],
+        "value": [
+            "Propane and natural gas Industry"
+        ],
+        "column": 1
+    },
+    "Bio gas": {
+        "color": "rgba(62,161,97,255)",
+        "target": [
+            "DHP output",
+            "sum energy use Industry"
+        ],
+        "value": [
+            "DHP use of Bio gas",
+            "bio gas Industry"
+        ],
+        "column": 1
+    },
+    "CGP use of wastes": {
+        "color": "rgba(125,1,2,255)",
+        "target": [
+            "CGP total energy output to users"
+        ],
+        "value": [
+            "CGP use of wastes"
+        ],
+        "column": 1
+    },
+    "bio fuels biodrivmedel": {
+        "color": "rgba(1,192,193,255)",
+        "target": [
+            "CGP total energy output to users",
+            "sum energy use Agriculture and forrestry",
+            "sum energy use Industry",
+            "sum energy use Transports"
+        ],
+        "value": [
+            "CGP use of bio oil",
+            "bio fuels Agriculture and forrestry",
+            "bio fuels Industry",
+            "bio fuels transports"
+        ],
+        "column": 1
+    },
+    "Oil products": {
+        "color": "rgba(92,92,92,255)",
+        "target": [
+            "DHP output",
+            "CGP total energy output to users",
+            "sum energy use homes",
+            "sum energy use others",
+            "sum energy use Public",
+            "sum energy use Agriculture and forrestry",
+            "sum energy use Industry",
+            "sum energy use Transports" 
+        ],
+        "value": [
+            "DHP use of oil products",
+            "CGP use of oil products",
+            "oil homes",
+            "oil others",
+            "oil Public",
+            "oil Agriculture and forrestry",
+            "oil industry",          
+            "oil transports"                
+        ],
+        "column": 1
+    },
+    "sum electric energy production EEP": {
+        "color": "rgba(255,127,0,255)",
+        "target": [
+            "distribution losses",
+            "sum energy use homes",
+            "sum energy use others",
+            "sum energy use Public",
+            "sum energy use Agriculture and forrestry",
+            "sum energy use Industry",
+            "sum energy use Transports"
+        ],
+        "value": [
+            "distribution losses from EEP",
+            "electricity homes",
+            "electricity others",
+            "electricity Public",
+            "electricity Agriculture and forrestry",
+            "electricity Industry",
+            "electricity Transports"
+        ],
+        "column": 2
+    },
+    "DHP sum input energy": {
+        "color": "rgba(0,255,1,255)",
+        "target": "link",
+        "value": [
+            ""
+        ],
+        "column": 2
+    },
+    "DHP use of Bio gas": {
+        "color": "rgba(62,161,97,255)",
+        "target": "link",
+        "value": [
+            ""
+        ],
+        "column": 2
+    },
+    "DHP use of oil products": {
+        "color": "rgba(92,92,92,255)",
+        "target":  "link",
+        "value": [
+            ""
+        ],
+        "column": 2
+    },
+    "CGP use of bio fuels green": {
+        "color": "rgba(0,255,1,255)",
+        "target": "link",
+        "value": [
+            ""
+        ],
+        "column": 2
+    },   
+    "CGP use of bio oil": {
+        "color": "rgba(1,192,193,255)",
+        "target": "link",
+        "value": [
+            ""
+        ],
+        "column": 2
+    },
+    "CGP use of oil products": {
+        "color": "rgba(92,92,92,255)",
+        "target": "link",
+        "value": [
+            ""
+        ],
+        "column": 2
+    },
+    "DHP output": {
+        "color": "rgba(127,128,0,255)",
+        "target": [
+            "distribution losses",
+            "sum energy use homes",
+            "sum energy use others",
+            "sum energy use Public",
+            "sum energy use Industry"
+        ],
+        "value": [
+            "distribution losses DHP",
+            "DHP homes",
+            "DHP others",
+            "DHP Public",
+            "DHP industry"
+        ],
+        "column": 2
+    },
+    "electric production CGP": {
+        "color": "rgba(255,127,0,255)",
+        "target": [
+            "sum electric energy production EEP"
+        ],
+        "value": [
+            "electric production CGP"
+        ],
+        "column": 2
+    },
+    "CGP output excl Electric production": {
+        "color": "rgba(127,128,0,255)",
+        "target": [
+            "distribution losses"
+        ],
+        "value": [
+            "distribution losses CGP"
+        ],
+        "column": 2
+    },
+    "CGP total energy output to users": {
+        "color": "grey",
+        "target": [
+            "electric production CGP",
+            "CGP output excl Electric production"
+        ],
+        "value": [
+            "electric production CGP",
+            "CGP output excl Electric production"
+        ],
+        "column": 2
+    },
+    "distribution losses": {
+        "color": "white",
+        "target": "output",
+        "column": 3 
+    },
+    "sum energy use homes": {
+        "color": "white",
+        "target": "output",
+        "column": 3 
+    },
+    "sum energy use others": {
+        "color": "white",
+        "target": "output",
+        "column": 3 
+    },
+    "sum energy use Public": {
+        "color": "white",
+        "target": "output",
+        "column": 3 
+    },
+    "sum energy use Agriculture and forrestry": {
+        "color": "white",
+        "target": "output",
+        "column": 3 
+    },
+    "sum energy use Industry": {
+        "color": "white",
+        "target": "output",
+        "column": 3 
+    },
+    "sum energy use Transports": {
+        "color": "white",
+        "target": "output",
+        "column": 3 
+    },
+    "distribution losses from EEP": {
+        "color": "rgba(255,127,0,255)",
+        "target": "link"
+    },
+    "distribution losses DHP": {
+        "color": "rgba(127,128,0,255)",
+        "target": "link"
+    },
+    "distribution losses CGP": {
+        "color": "rgba(127,128,0,255)",
+        "target": "link"
+    },
+    "electricity homes": {
+        "color": "rgba(255,127,0,255)",
+        "target": "link"
+    },
+    "bio fuels small houses direct heating green": {
+        "color": "rgba(0,255,1,255)",
+        "target": "link"
+    },
+    "DHP homes": {
+        "color": "rgba(127,128,0,255)",
+        "target": "link"
+    },
+    "oil homes": {
+        "color": "rgba(92,92,92,255)",
+        "target": "link"
+    },  
+    "electricity others": {
+        "color": "rgba(255,127,0,255)",
+        "target": "link"
+    },
+    "DHP others": {
+        "color": "rgba(127,128,0,255)",
+        "target": "link"
+    },
+    "oil others": {
+        "color": "rgba(92,92,92,255)",
+        "target": "link"
+    },
+    "electricity Public": {
+        "color": "rgba(255,127,0,255)",
+        "target": "link"
+    },
+    "DHP Public": {
+        "color": "rgba(127,128,0,255)",
+        "target": "link"
+    },
+    "oil Public": {
+        "color": "rgba(92,92,92,255) ",
+        "target": "link"
+    },
+    "electricity Agriculture and forrestry": {
+        "color": "rgba(255,127,0,255)",
+        "target": "link"
+    },
+    "bio fuels Agriculture and forrestry": {
+        "color": "rgba(1,192,193,255)",
+        "target": "link"
+    },
+    "oil Agriculture and forrestry": {
+        "color": "rgba(92,92,92,255)",
+        "target": "link"
+    },
+    "electricity Industry": {
+        "color": "rgba(255,127,0,255)",
+        "target": "link"
+    },
+    "DHP industry": {
+        "color": "rgba(127,128,0,255)",
+        "target": "link"
+    },
+    "bio gas Industry": {
+        "color": "rgba(62,161,97,255)",
+        "target": "link"
+    },
+    "bio fuels Industry green": {
+        "color": "rgba(0,255,1,255)",
+        "target": "link"
+    },
+    "bio fuels Industry": {
+        "color": "rgba(1,192,193,255)",
+        "target": "link"
+    },
+    "oil industry": {
+        "color": "rgba(92,92,92,255)",
+        "target": "link"
+    },
+    "electricity Transports": {
+        "color": "rgba(255,127,0,255)",
+        "target": "link"
+    },
+    "bio fuels transports": {
+        "color": "rgba(1,192,193,255)",
+        "target": "link"
+    },
+    "oil transports": {
+        "color": "rgba(92,92,92,255)",
+        "target": "link"
+    },
+    "electricity apartment buildings ": {
+        "color": "rgba(255,127,0,255)",
+        "target": "link"
+    },
+    "electricity holiday cottages": {
+        "color": "rgba(255,127,0,255)",
+        "target": "link"
+    },
+    "electricity small houses": {
+        "color": "rgba(255,127,0,255)",
+        "target": "link"
+    }
+}
+    
