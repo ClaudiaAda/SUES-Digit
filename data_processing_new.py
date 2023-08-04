@@ -71,7 +71,7 @@ def build_scen_data(scen_file, year, scenario,value_slider,value_slider2, peak_h
     s_e_usage = scen_file["T" + year + " sum energy usage"][num_simulation[0]]
 
 
-    # 1 LOOP : NODES -> Read all the energies stored in the dictionary and
+    # 1 LOOP: NODES -> Read all the energies stored in the dictionary and
     # if it can be displayed in the Diagram, (not a link) see if it
     # is used in this scenario (it is found in the excel file and has a value)
     # is saved along with some information.
@@ -121,6 +121,7 @@ def build_scen_data(scen_file, year, scenario,value_slider,value_slider2, peak_h
 
                     scen_data["node"]["percentage"].append(percentage_name)
 
+                    # ASSIGN X-Y POSITIONS 
                     # Assign position in x-axis to nodes, x-position is defined
                     # in the dictionary for some special energies. If they do not 
                     # have it defined it is assigned a predefined value
@@ -146,34 +147,23 @@ def build_scen_data(scen_file, year, scenario,value_slider,value_slider2, peak_h
                     y[info_data[label]["column"]] += percentage_value/2
 
 
-    # For the energy types used, let's declare their connections with the values
+    # 2 LOOP: LINKS -> For the energy types used, it declare their connections with their values
     for label in scen_data["node"]["label"]:
 
-        #print(label)
-
-        # Only treat "normal" energy types, the ones with targets: connections.
+        # Only treat "normal" energy types, the ones with targets(connections).
         if info_data[label]["target"] != ("link" and "output"):
-            #print("")
-            #print ("Soy variable")
-            #print(label)
             # There can be more than one connection, so it is evaluated each one (0,a).
             for a in range(len(info_data[label]["target"])):
-                
                 # If the variable to connect and the variable that assigns 
                 # the value to that connection also exists, it will be added 
                 # their numbers to the dictionary for Sankey Diagram, and the color
-                # (It is compared the name and the temporary name) 
                 target_name = info_data[label]["target"][a]
                 value_name = info_data[label]["value"][a]
-                #print("")
-                #print("La union es:")
-                #print(target_name)
-                #print(value_name)
 
                 if ((("T0 " + target_name) in scen_labels) or (target_name in constant_variables)):
-
+                    # This line checks if the target exists in the simulation
                     if target_name in node_positions.keys():
-                
+                        
                         target_position = node_positions[target_name]
                         scen_data["link"]["target"].append(target_position)
                         
