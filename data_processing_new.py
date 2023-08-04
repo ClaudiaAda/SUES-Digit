@@ -14,7 +14,7 @@ def build_scen_data(scen_file, year, scenario,value_slider,value_slider2, peak_h
     info_data = json.loads(response_all_labels.read())
 
 
-    # LOAD CONSTANT VARIABLES information it is permanent for all scenarios
+    # LOAD CONSTANT ENERGIES information it is permanent for all scenarios
     if kommun == "Skara kommun":
         constant_file = pd.read_csv("https://raw.githubusercontent.com/ClaudiaAda/Scenario_Files/main/vensim_data_Constants_Skara_ver1_good.csv")
 
@@ -38,11 +38,12 @@ def build_scen_data(scen_file, year, scenario,value_slider,value_slider2, peak_h
     # List used to save the y-position of the variables in their columns
     y = [0,0.01,0.01,0.01] 
 
+
     # Obtain the number simulation depending on the scenario and sliders' values to take the correct variables' values.
-    # To select the correct number the values of the table are rounded up
     scen_labels = (scen_file.head(0)) #Save the first row - labels' names
     columns_names=list(scen_labels)
     column1 = columns_names[1]
+    # To select the correct number the values of the table are rounded up
     scen_file[column1] = pd.Series([round(val,2) for val in scen_file[column1]])
     
     if(scenario==7):
@@ -52,8 +53,10 @@ def build_scen_data(scen_file, year, scenario,value_slider,value_slider2, peak_h
         column2=scen_labels[2]
         scen_file[column2] = pd.Series([round(val,2) for val in scen_file[column2]])
 
+        # np.where function finds the row where the slider value is.
         cond1 = np.where(scen_file[column1] == value_slider)
         cond2 = np.where(scen_file[column2] == value_slider2) 
+        # the object obtained is an array, this lines are used so the data can be used later
         cond1 = cond1[0].tolist()
         cond2 = cond2[0].tolist()
         num_simulation = list(set(cond1).intersection(cond2))
@@ -63,22 +66,21 @@ def build_scen_data(scen_file, year, scenario,value_slider,value_slider2, peak_h
         num_simulation = num_sim[0].tolist()
 
 
-    # It is also display the sum of energies        
+    # The sum of production and usage energies 
     s_e_production = scen_file["T" + year + " sum energy production"][num_simulation[0]]
     s_e_usage = scen_file["T" + year + " sum energy usage"][num_simulation[0]]
 
-    # Calculate the sum of energies in the middle column
 
-
-    # Read all the energy types and: 
-    # - If it appears with its own name safe as constant.
-    # - If it can be displayed in the Diagram, (not a link) see 
-    # if it is used in this scenario save it and assign a number.
+    # 1 LOOP : NODES -> Read all the energies stored in the dictionary and
+    # if it can be displayed in the Diagram, (not a link) see if it
+    # is used in this scenario (it is found in the excel file and has a value)
+    # is saved along with some information.
     for label in list(info_data.keys()):
 
         if info_data[label]["target"] != "link":
-            # To know if it is used in the scenario, it looks if its name or 
-            # its first temporary variable appears in the first row
+            # To know if it is used in the simulation, it looks if its
+            # name appears in the constants' excel file or its first
+            # temporary variable appears in the first row of the variables' excel file
             if (("T0 " + label) in scen_labels) or label in constant_variables:
                 
                 # The value of the node is stored, this value is needed in later processes
@@ -87,21 +89,21 @@ def build_scen_data(scen_file, year, scenario,value_slider,value_slider2, peak_h
                 elif ("T0 " + label) in scen_labels:
                         node_value = (scen_file["T" + str(year) + " " + label][num_simulation[0]])
 
-                #print(label)
-                #print(node_value)
-
                 # If the value is 0, it will not be stored to display it in the sankey 
                 if node_value != 0:
-
-                    #print("Entro")
-
+                    # The energy name is stored as it is going to be displayed and 
+                    # a number is associated with it (Sankey's diagram works with vectors of numbers)
                     node_positions[label] = i
                     # Save the name of the label and its color in the scenario dictionary
                     scen_data["node"]["label"].append(label)
                     scen_data["node"]["color"].append(info_data[label]["color"])
+                    # i is actualised with the number of the next energy
                     i += 1
                     
-                    # Calculate percentages
+                    # Calculate percentages:
+                    # - percentage_value is used to define the y-position of the energies in the Sankey
+                    # - percentage_name is used to show the value of the percentage of the 
+                    # energy regarding the sum of energy in the Sankey
                     # Input nodes
                     if info_data[label]["column"] == 1:
                         percentage_value = round(node_value/s_e_production,2)
@@ -119,7 +121,9 @@ def build_scen_data(scen_file, year, scenario,value_slider,value_slider2, peak_h
 
                     scen_data["node"]["percentage"].append(percentage_name)
 
-                    # Assign position in x-axis to nodes 
+                    # Assign position in x-axis to nodes, x-position is defined
+                    # in the dictionary for some special energies. If they do not 
+                    # have it defined it is assigned a predefined value
                     if "x" in info_data[label]:
                         scen_data["node"]["x"].append(info_data[label]["x"])
 
@@ -132,22 +136,14 @@ def build_scen_data(scen_file, year, scenario,value_slider,value_slider2, peak_h
                     elif info_data[label]["column"] == 3:
                         scen_data["node"]["x"].append(1)
             
-
                     # Assign position in y-axis to nodes 
-                    y[info_data[label]["column"]] += percentage_value/2
-                    y_position = y[info_data[label]["column"]]
-
-                    scen_data["node"]["y"].append(y_position)
+                    # The possition is actualised taking in to account the half of the width of the energy
+                    # because the possition assigned to the center of the label
                     y[info_data[label]["column"]] += percentage_value/2
 
-                    print(label)
-                    print(percentage_value)
-
-
-    # Assign position in y-axis to nodes
-    """for label in list(positions.keys()):
-        y_position = positions[label] * scen_data["link"]["value"][i]
-        scen_data["node"]["y"].append(y_position)"""
+                    scen_data["node"]["y"].append(y[info_data[label]["column"]])
+                    # The other half of the width is added for the next energy label
+                    y[info_data[label]["column"]] += percentage_value/2
 
 
     # For the energy types used, let's declare their connections with the values

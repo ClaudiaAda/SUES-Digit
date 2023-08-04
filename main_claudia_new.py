@@ -8,7 +8,7 @@ import time
 from data_processing_new import build_scen_data
 from sankey_diagram_new import build_sankey
 
-fig = go.Figure()
+
 
 app = Dash(__name__)
 app.title = "SUES-DIGIT Project"
@@ -218,24 +218,30 @@ app.layout = html.Div(
                         ),
                         html.Data(
                             id= "actual_unit",
-                            style = {"visibility" : "hidden"}
+                            style = {'display':'none'}
                         )
                     ]
                 )
             ]
         ),
-        dcc.Graph(
-            id = "graph", 
-            figure=  {
-                'layout' : {
-                    'plot_bgcolor' :'yellow', #hay que meterlo en el update todo el layout tb
-                    'paper_bgcolor' : 'pink',
-                    'font' : {
-                        'color' : 'black'
+        html.Div(
+            id="graph-container", 
+            style = {'display' : 'none'},
+            children = [ 
+            dcc.Graph(
+                id = "graph",
+                figure=  {
+                    'layout' : {
+                        'plot_bgcolor' :'blue', #hay que meterlo en el update todo el layout tb
+                        'paper_bgcolor' : 'red',
+                        'font' : {
+                            'color' : 'black'
+                        },
+                        'title' : 'holi', 
                     },
-                    'title' : 'holi'
-                }
-            }
+                },
+                )
+            ]
         )    
     ],
 )
@@ -373,10 +379,6 @@ def update_sum_unit(check_item, units):
         if units == 'giga':
             return  f"Sum Energy Production (Gwh):", f"Sum Energy Usage (Gwh):", f"Gwh"
 
-   
-# VARIABLES NEEDED
-año = '0'
-value_condition = ""
 
 # SELECT THE URL OF EACH SCENARIO CASE
 url_scenarios_cases = 'https://raw.githubusercontent.com/ClaudiaAda/SUES-Digit/main/Scenarios_cases3.json' 
@@ -387,6 +389,7 @@ info_scenarios_cases = json.loads(response_scenario_cases.read())
     Output("graph", "figure"),
     Output("sum_energy_production", "children"),
     Output("sum_energy_usage", "children"),
+    Output('graph-container', 'style'),
     Input("kommun_menu", "value"),
     Input("scenario_menu", "value"),
     Input("years", "value"),
@@ -401,43 +404,38 @@ def display_sankey(kommun,scenario,years,value_slider,value_slider2, peak_hour, 
 
     if (kommun is None) or (scenario is None) or (years is None) or (value_slider is None):
         raise PreventUpdate
+        return
     
     else:
         print("")
         print("")
         print("")
-        print("NUEVA SIMULACION AAAAAAAAAAAAAAAAAAAAAAAAAAA")
+        print("NEW SIMULATION AAAAAAAAAAAAAAAAAAAAAAAAAAA")
         print("")
         print("")
         print("")
 
-        print(kommun)
+        """print(kommun)
         print(scenario)
         print(years)
         print(value_slider)
         print(value_slider2)
         print(peak_hour)
         print(unit)
-        print(actual_unit)
+        print(actual_unit)"""
         #print(info_scenarios_cases[kommun][scenario])
+
         # Save the correct excel file
         scen_file = pd.read_csv(info_scenarios_cases[kommun][scenario])
     
         # Create a dictionary with the information selected 
         (scen_data, s_e_production, s_e_usage) = build_scen_data(scen_file, years, scenario,value_slider,value_slider2, peak_hour, unit, kommun)
-        #print("Data hecho")
 
         # Display a sankey diagram with the information
         fig = build_sankey(scen_data, actual_unit)
         fig.update_layout()
-        #print("Sankey hecho")
-        
-        print(peak_hour)
-        print(unit)
 
-        return fig, s_e_production, s_e_usage
+        return fig, s_e_production, s_e_usage, {'display':'block'}
     
-    
-
 app.run_server(debug=True)
 
