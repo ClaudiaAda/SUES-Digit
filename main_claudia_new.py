@@ -8,8 +8,6 @@ import time
 from data_processing_new import build_scen_data
 from sankey_diagram_new import build_sankey
 
-
-
 app = Dash(__name__)
 app.title = "SUES-DIGIT Project"
 
@@ -128,10 +126,10 @@ app.layout = html.Div(
                                     options = [
                                         {'label' : 'Scenario 1 - Ratio of EVs', 'value' : "1" },
                                         {'label' : 'Scenario 2 - New industry establishment NIE', 'value' : "2" },
-                                        {'label' : 'Scenario 3 - New Houses - ratio New houses DHP user', 'value' : "3" },
-                                        {'label' : 'Scenario 4 - users apartment buildings - Goal ratio DHP users small houses', 'value' : "4" },
-                                        {'label' : 'Scenario 5 - no large solar panel projects', 'value' : "5" },
-                                        {'label' : 'Scenario 6 - no large wind mill projects', 'value' : "6" },
+                                        {'label' : 'Scenario 3 - New Houses - Ratio New houses DHP user', 'value' : "3" },
+                                        {'label' : 'Scenario 4 - Users apartment buildings - Goal ratio DHP users small houses', 'value' : "4" },
+                                        {'label' : 'Scenario 5 - Number large solar panel projects', 'value' : "5" },
+                                        {'label' : 'Scenario 6 - Number large wind mill projects', 'value' : "6" },
                                         {'label' : 'Scenario All', 'value' : "7" }
                                     ],
                                     placeholder = "Select a scenario..."
@@ -144,13 +142,13 @@ app.layout = html.Div(
                                 html.Label("Place for the slider"),
                                 html.Div(
                                     children = [
-                                        dcc.Slider(
+                                        dcc.RangeSlider(
                                             min=0,
                                             max=1,
                                             step=0.05,
-                                            value=None,
+                                            value=[None,None],
                                             id="slider",
-                                            #vertical=True   
+                                            #vertical=True,
                                         ),
                                         dcc.Markdown(
                                             id="slider_scale",
@@ -242,7 +240,26 @@ app.layout = html.Div(
                 },
                 )
             ]
-        )    
+        ),
+        html.Div(
+            id="graph-container2", 
+            style = {'display' : 'none'},
+            children = [ 
+            dcc.Graph(
+                id = "graph2",
+                figure=  {
+                    'layout' : {
+                        'plot_bgcolor' :'blue', #hay que meterlo en el update todo el layout tb
+                        'paper_bgcolor' : 'red',
+                        'font' : {
+                            'color' : 'black'
+                        },
+                        'title' : 'holi', 
+                    },
+                },
+                )
+            ]
+        )       
     ],
 )
 
@@ -385,11 +402,16 @@ url_scenarios_cases = 'https://raw.githubusercontent.com/ClaudiaAda/SUES-Digit/m
 response_scenario_cases = urllib.request.urlopen(url_scenarios_cases)
 info_scenarios_cases = json.loads(response_scenario_cases.read())
 
+s_e_production2 = 0
+s_e_usage2 = 0
+
 @app.callback(
     Output("graph", "figure"),
+    Output("graph2", "figure"),
     Output("sum_energy_production", "children"),
     Output("sum_energy_usage", "children"),
     Output('graph-container', 'style'),
+    Output('graph-container2', 'style'),
     Input("kommun_menu", "value"),
     Input("scenario_menu", "value"),
     Input("years", "value"),
@@ -415,27 +437,33 @@ def display_sankey(kommun,scenario,years,value_slider,value_slider2, peak_hour, 
         print("")
         print("")
 
-        """print(kommun)
+        print(kommun)
         print(scenario)
         print(years)
-        print(value_slider)
+        print(value_slider[0])
+        print(value_slider[1])
+        print(value_slider2)
         print(value_slider2)
         print(peak_hour)
         print(unit)
-        print(actual_unit)"""
+        print(actual_unit)
         #print(info_scenarios_cases[kommun][scenario])
 
         # Save the correct excel file
         scen_file = pd.read_csv(info_scenarios_cases[kommun][scenario])
     
         # Create a dictionary with the information selected 
-        (scen_data, s_e_production, s_e_usage) = build_scen_data(scen_file, years, scenario,value_slider,value_slider2, peak_hour, unit, kommun)
+        (scen_data, s_e_production, s_e_usage) = build_scen_data(scen_file, years, scenario,value_slider[0],value_slider2, peak_hour, unit, kommun)
+        (scen_data2, s_e_production2, s_e_usage2) = build_scen_data(scen_file, years, scenario,value_slider[1],value_slider2, peak_hour, unit, kommun)
 
         # Display a sankey diagram with the information
         fig = build_sankey(scen_data, actual_unit)
         fig.update_layout()
 
-        return fig, s_e_production, s_e_usage, {'display':'block'}
+        fig2 = build_sankey(scen_data2, actual_unit)
+        fig2.update_layout()
+
+        return fig, fig2, s_e_production, s_e_usage, {'display':'block'}, {'display':'block'}
     
 app.run_server(debug=True)
 
