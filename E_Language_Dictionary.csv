@@ -1,0 +1,24 @@
+﻿ID;EN;SV
+header_description;Distribution of energy;Fördelning av energi
+kommun_menu;Select a place…;Välj en plats...
+year;Year: ;År: 
+years;Select a year…;Välj ett år…
+peak_hour;Peak hour:;Maxtimme
+winter;Winter;Vinter
+summer;Summer;Sommar
+scenario_description;Choose a scenario:;Välj ett scenario:
+scenario_menu;Select a scenario...;Välj ett scenario...
+scen1;Scenario 1 - Ratio of Evs;Scenario 1 - Andel elbilar
+scen2;Scenario 2 - New industry establishment NIE;Scenario 2 - Nyetablering av industri NIE
+scen3 ;Scenario 3 - New Houses - Ratio New houses DHP user;Scenario 3 - Nya hus - Förhållande Nya hus DHP-användare
+scen4;Scenario 4 - Users apartment buildings - Goal ratio DHP users small houses;Scenario 4 - Användare flerbostadshus - Målkvot DHP användare småhus
+scen5;Scenario 5 - Number large solar panel projects;Scenario 5 - Antal stora solpanelsprojekt
+scen6;Scenario 6 - Number large wind mill projects;Scenario 6 - Antal stora vindkraftsprojekt
+scenAll;Scenario All;Scenario Alla
+select_slider;Select a value:;Välj ett värde:
+slider_scale3;New houses;Nya hus
+slider_scale31;Ratio new houses DHP user;Förhållande nya hus DHP-användare
+slider_scale4;Goal ratio DHP users apartment buildings;Målkvot DHP användare flerbostadshus
+slider_scale41;Goal ratio DHP users small houses;Målkvot DHP användare småhus
+slider_scale5;Number large solar panel projects;Antal stora solpanelsprojekt
+slider_scale6;Number large wind mill projects;Antal stora vindkraftsprojekt
